@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A3 Community — V2</title>
+<style>
+:root{--ink:#181a17;--muted:#777970;--paper:#f6f5f1;--card:#fff;--line:#e5e3db;--dark:#20231e;--lime:#d9ff42;--soft:#eff7d3;--purple:#ece7ff;--orange:#fff0e3;--radius:22px}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.side{width:248px;background:var(--dark);color:#fff;padding:27px 17px;position:fixed;height:100vh}.logo{font-size:30px;font-weight:900;letter-spacing:-2px;margin:0 13px}.sub{font-size:10px;color:#999d95;letter-spacing:1.3px;margin:2px 13px 30px}.nav button{width:100%;border:0;background:transparent;color:#bfc2b9;text-align:left;padding:12px 14px;border-radius:13px;margin:3px 0}.nav button.active,.nav button:hover{background:#31352e;color:#fff}.nav i{font-style:normal;width:25px;display:inline-block}.mini{position:absolute;left:17px;right:17px;bottom:18px;border-top:1px solid #3b3e37;padding:17px 10px;display:flex;gap:10px;align-items:center}.ava{width:40px;height:40px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-weight:850;color:#1d201b;flex:none}.main{margin-left:248px;padding:30px 42px;max-width:1500px;width:100%}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.top h1{margin:0;font-size:30px;letter-spacing:-1.2px}.muted{color:var(--muted);font-size:13px}.btn{border:0;border-radius:13px;padding:11px 16px;font-weight:800}.dark{background:var(--dark);color:#fff}.lime{background:var(--lime);color:var(--dark)}.white{background:#fff;border:1px solid var(--line)}.page{display:none}.page.active{display:block}
+.hero{background:var(--dark);color:#fff;border-radius:28px;padding:30px;display:grid;grid-template-columns:1.45fr .85fr;gap:18px}.eyebrow{display:inline-block;background:var(--lime);color:#1c201a;border-radius:99px;padding:7px 11px;font-size:11px;font-weight:900}.hero h2{font-size:39px;line-height:1;letter-spacing:-2px;max-width:670px;margin:14px 0}.hero p{color:#c9ccc2;max-width:650px;line-height:1.55}.heroRight{background:#33372f;border-radius:20px;padding:21px;display:flex;flex-direction:column;justify-content:space-between}.heroRight .n{font-size:52px;font-weight:900;letter-spacing:-3px}.section{margin-top:31px}.sectionHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.sectionHead h3{margin:0;font-size:21px;letter-spacing:-.5px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px}.eventPic{height:140px;border-radius:16px;margin-bottom:14px;padding:15px;display:flex;align-items:flex-end;font-size:22px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#dcff55,#89a82d)}.eventPic.p{background:linear-gradient(135deg,#e0dbff,#9184e4)}.eventPic.o{background:linear-gradient(135deg,#ffd0ae,#da8050)}.meta{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:850;color:var(--muted)}.card h4{margin:7px 0 6px;font-size:17px}.card p{font-size:13px;line-height:1.45;color:#62645e;margin:0 0 14px}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.tag{font-size:11px;font-weight:800;border-radius:99px;padding:6px 9px;background:#f0efe9}.tag.g{background:var(--soft)}.tag.p{background:var(--purple)}.tag.o{background:var(--orange)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px}.stat b{display:block;font-size:29px;letter-spacing:-1px}.stat span{font-size:11px;color:var(--muted);font-weight:700}.trend{font-size:11px;color:#6e7e35;font-weight:800}
+.search{width:100%;background:#fff;border:1px solid var(--line);padding:13px 15px;border-radius:14px;outline:none}.filters{display:flex;gap:9px;margin:15px 0}.filters select{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px}
+.members{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.member{display:flex;gap:12px}.member .ava{width:48px;height:48px}.member h4{margin:0 0 2px}.member p{margin:0;color:var(--muted);font-size:12px}.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.chip{font-size:10px;font-weight:800;padding:6px 8px;border-radius:99px;background:#f1f0eb}.chip.offer{background:var(--soft)}.chip.seek{background:var(--purple)}
+.aiBox{background:linear-gradient(110deg,#252821,#34382f);color:#fff;border-radius:22px;padding:23px;margin-bottom:16px;display:flex;justify-content:space-between;gap:20px;align-items:center}.aiBox h3{margin:0 0 5px;font-size:21px}.aiBox p{margin:0;color:#c8ccc1;font-size:13px;max-width:650px}.matches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.match{background:#fff;border:1px solid var(--line);border-radius:20px;padding:17px}.score{float:right;background:var(--lime);padding:6px 8px;border-radius:99px;font-size:11px;font-weight:900}.why{font-size:12px;line-height:1.45;color:#555850;background:#f5f4ef;border-radius:12px;padding:10px;margin:12px 0}.match .ava{width:42px;height:42px;display:inline-grid;vertical-align:middle;margin-right:8px}
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.col{background:#eeece6;border-radius:18px;padding:12px;min-height:220px}.col h4{margin:3px 4px 11px}.opp{background:#fff;border-radius:14px;padding:12px;margin:8px 0;border:1px solid var(--line)}.opp b{font-size:13px}.opp small{display:block;color:var(--muted);margin-top:4px}.money{font-weight:900;margin-top:8px}
+.chart{height:190px;display:flex;align-items:end;gap:12px;padding:15px 10px 5px}.bar{flex:1;background:var(--dark);border-radius:8px 8px 2px 2px;min-height:20px;position:relative}.bar span{position:absolute;top:-20px;font-size:10px;color:var(--muted);width:100%;text-align:center}.labels{display:flex;gap:12px;padding:0 10px}.labels div{flex:1;text-align:center;font-size:10px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0008;display:none;place-items:center;z-index:20;padding:20px}.modal.open{display:grid}.modalbox{max-width:520px;width:100%;background:#fff;border-radius:25px;padding:26px}.close{float:right;border:0;border-radius:50%;width:31px;height:31px}
+@media(max-width:1000px){.side{width:75px}.logo{font-size:22px}.sub,.nav span,.mini div:not(.ava){display:none}.main{margin-left:75px;padding:22px}.grid3,.members,.matches{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.stats,.pipeline{grid-template-columns:repeat(2,1fr)}} 
+
+
+.askGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}
+.askItem{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:10px}
+.askItem b{display:block;margin-bottom:5px}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px}
+.step b{display:block;margin:5px 0}.step .num{font-size:11px;font-weight:900;color:#777}
+.spotlight{display:flex;gap:16px;align-items:flex-start}
+.spotlight .ava{width:64px;height:64px;font-size:18px}
+.ambassador{display:flex;align-items:center;gap:10px}
+.scorecard{background:var(--dark);color:#fff;border-radius:24px;padding:24px}
+.scoreRing{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--lime) 0 78%,#3c4038 78% 100%)}
+.scoreRing>div{width:94px;height:94px;border-radius:50%;background:var(--dark);display:grid;place-items:center;text-align:center}
+.scoreRing b{font-size:34px}
+.kpiLine{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid #3a3e36}
+@media(max-width:1000px){.askGrid{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}}
+
+
+.newMembers{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.newMember{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.memberPhoto{width:100%;aspect-ratio:1/1;border-radius:17px;object-fit:cover;display:block;margin-bottom:14px}
+.newMember h4{margin:5px 0 2px;font-size:17px}
+.memberRole{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.memberAbout{font-size:12px;line-height:1.45;color:#5e615a;margin:8px 0 12px}.memberAge{font-size:11px;font-weight:800;color:#777;margin-bottom:8px}.demoNote{font-size:10px;color:#8a8d86;margin-top:8px}
+.seekBox{background:#f4f0ff;border-radius:12px;padding:10px;font-size:11px;line-height:1.4}
+.seekBox b{display:block;margin-bottom:3px}
+@media(max-width:1100px){.newMembers{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.newMembers{grid-template-columns:1fr}.memberPhoto{aspect-ratio:16/10}}
+
+/* ===== MOBILE / RESPONSIVE ===== */
+@media (max-width: 700px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  body{padding-bottom:76px}
+  .app{display:block;min-height:100vh}
+  .side{
+    position:fixed;
+    left:0;right:0;bottom:0;top:auto;
+    width:100%;height:68px;
+    padding:8px 8px 7px;
+    z-index:50;
+    display:block;
+    border-top:1px solid #3b3e37;
+  }
+  .logo,.sub,.mini{display:none!important}
+  .nav{display:flex;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{
+    flex:0 0 64px;
+    min-width:64px;
+    margin:0;
+    padding:7px 4px;
+    text-align:center;
+    border-radius:12px;
+    font-size:9px;
+    line-height:1.1;
+  }
+  .nav i{display:block;width:auto;font-size:19px;margin:0 auto 3px}
+  .nav span{display:block!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .main{margin-left:0;width:100%;max-width:none;padding:18px 14px 24px}
+  .top{align-items:flex-start;gap:14px;flex-direction:column;margin-bottom:18px}
+  .top h1{font-size:27px;line-height:1.05}
+  .top>div:last-child{display:flex;gap:8px;width:100%}
+  .top>div:last-child .btn{flex:1;padding:10px 8px;font-size:12px}
+
+  .hero{grid-template-columns:1fr;padding:21px;border-radius:22px;gap:14px}
+  .hero h2{font-size:31px;line-height:1.03;letter-spacing:-1.4px;margin:12px 0}
+  .hero p{font-size:13px}
+  .hero .btn{width:100%;margin-top:5px}
+  .heroRight{padding:17px}
+  .heroRight .n{font-size:43px}
+
+  .section{margin-top:24px}
+  .sectionHead{align-items:flex-start;gap:8px}
+  .sectionHead h3{font-size:19px}
+  .grid3,.members,.matches,.stats,.pipeline,.timeline,.askGrid{grid-template-columns:1fr!important}
+  .card,.match,.stat{border-radius:18px}
+  .eventPic{height:128px}
+
+  .filters{display:grid;grid-template-columns:1fr;gap:8px}
+  .filters select{width:100%}
+  .search{font-size:16px}
+
+  .member{align-items:flex-start}
+  .member .row{flex-wrap:wrap}
+  .chips{max-width:100%}
+
+  .aiBox{flex-direction:column;align-items:flex-start;padding:19px}
+  .aiBox .btn{width:100%}
+
+  .pipeline{display:grid;gap:10px}
+  .col{min-height:auto}
+
+  .row{flex-wrap:wrap}
+  .row>.btn{max-width:100%}
+
+  .chart{gap:6px;padding-left:0;padding-right:0;height:165px}
+  .labels{gap:6px;padding:0}
+
+  .modal{padding:12px;align-items:end}
+  .modalbox{max-width:none;border-radius:22px 22px 10px 10px;padding:20px;max-height:88vh;overflow:auto}
+
+  table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  img,svg,canvas{max-width:100%;height:auto}
+  button,.btn{touch-action:manipulation}
+}
+
+@media (max-width: 380px){
+  .main{padding-left:11px;padding-right:11px}
+  .hero h2{font-size:28px}
+  .top h1{font-size:25px}
+  .nav button{flex-basis:58px;min-width:58px;font-size:8px}
+}
+
+
+/* Demo Google-Form-style registration */
+.formModal .modalbox{max-width:620px;padding:0;overflow:hidden;background:#f0ebf8}
+.gformHead{background:#fff;border-top:10px solid #673ab7;border-radius:18px 18px 10px 10px;padding:22px 24px;margin:18px}
+.gformHead h2{margin:4px 0 8px;font-size:25px}
+.gformHead p{margin:0;color:#666;font-size:13px;line-height:1.45}
+.gformReq{color:#d93025;font-size:12px;margin-top:12px}
+.gquestion{background:#fff;border-radius:10px;padding:19px 22px;margin:12px 18px;border:1px solid #ded7e8}
+.gquestion label{display:block;font-size:14px;font-weight:750;margin-bottom:12px}
+.gquestion .req{color:#d93025}
+.ginput,.gselect,.gtextarea{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid #aaa;padding:9px 2px;font:inherit;background:transparent;outline:none}
+.gtextarea{min-height:68px;resize:vertical}
+.ginput:focus,.gselect:focus,.gtextarea:focus{border-bottom:2px solid #673ab7}
+.gactions{display:flex;justify-content:space-between;align-items:center;padding:5px 18px 22px}
+.gsubmit{background:#673ab7;color:#fff;border:0;border-radius:5px;padding:11px 22px;font-weight:800;cursor:pointer}
+.gclear{background:transparent;color:#673ab7;border:0;font-weight:800;cursor:pointer}
+.gbrand{text-align:center;color:#777;font-size:11px;padding-bottom:16px}
+.confirmBox{display:none;background:#fff;border-radius:14px;padding:28px;margin:18px;text-align:left}
+.confirmBox.show{display:block}
+.formBody.hidden{display:none}
+
+/* LinkedIn icon */
+.linkedinLink{
+  width:31px;height:31px;border-radius:8px;background:#0a66c2;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  font-weight:900;font-size:15px;line-height:1;flex:0 0 auto;
+  box-shadow:0 3px 10px rgba(10,102,194,.16)
+}
+.linkedinLink:hover{transform:translateY(-1px);filter:brightness(.96)}
+.memberNameRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+@media(max-width:700px){
+  .formModal .modalbox{width:95%;max-height:92vh;overflow-y:auto}
+  .gformHead,.gquestion,.confirmBox{margin-left:10px;margin-right:10px}
+}
+
+
+/* Prominent events on Home */
+.homeEvents{
+  margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:26px;
+  padding:22px;box-shadow:0 10px 30px rgba(32,35,30,.05)
+}
+.homeEventsHead{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:16px
+}
+.homeEventsHead h3{font-size:25px;margin:0 0 4px;letter-spacing:-.8px}
+.homeEventsHead p{margin:0;color:var(--muted);font-size:13px}
+.eventCardPhoto{padding:0;overflow:hidden}
+.eventPhoto{
+  height:205px;background-size:cover;background-position:center;position:relative;
+  display:flex;align-items:flex-end
+}
+.eventPhoto:after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.62))
+}
+.eventPhotoBadge{
+  position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.93);
+  color:var(--ink);padding:7px 10px;border-radius:99px;font-size:10px;font-weight:900;
+  letter-spacing:.5px
+}
+.eventPhotoTitle{
+  position:relative;z-index:2;color:#fff;padding:18px;font-size:22px;font-weight:900;
+  letter-spacing:-.6px
+}
+.eventBody{padding:16px 18px 18px}
+.eventBody h4{font-size:18px;margin:5px 0 6px}
+.eventBody p{min-height:38px}
+.eventDateStrong{font-size:11px;font-weight:900;color:#555b51;text-transform:uppercase;letter-spacing:.6px}
+@media(max-width:1000px){.eventPhoto{height:190px}}
+@media(max-width:700px){
+  .homeEvents{padding:15px;border-radius:20px}
+  .homeEventsHead{align-items:flex-start;flex-direction:column}
+  .homeEventsHead h3{font-size:22px}
+  .eventPhoto{height:200px}
+}
+
+
+/* ===== FINAL RESPONSIVE FIX — preserves approved A3 aesthetic ===== */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app {
+  width: 100%;
+  max-width: 100vw;
+}
+
+.main {
+  margin-left: 248px;
+  width: calc(100% - 248px);
+  max-width: none;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.page,
+.hero,
+.hero > *,
+.grid3 > *,
+.members > *,
+.matches > *,
+.stats > *,
+.pipeline > *,
+.timeline > *,
+.askGrid > *,
+.newMembers > * {
+  min-width: 0;
+}
+
+.grid3,
+.members,
+.matches,
+.stats,
+.pipeline,
+.timeline,
+.askGrid,
+.newMembers {
+  width: 100%;
+}
+
+.card,
+.newMember,
+.match,
+.stat,
+.col,
+.step,
+.askItem,
+.scorecard,
+.homeEvents {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.eventPhoto,
+.memberPhoto {
+  width: 100%;
+  max-width: 100%;
+}
+
+.eventPhoto {
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.row {
+  min-width: 0;
+}
+
+.row > * {
+  min-width: 0;
+}
+
+.btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+img, video, svg, canvas, iframe {
+  max-width: 100%;
+}
+
+/* Large desktop */
+@media (min-width: 1400px) {
+  .main { padding-left: 48px; padding-right: 48px; }
+}
+
+/* Laptop / small desktop */
+@media (max-width: 1199px) and (min-width: 1001px) {
+  .main {
+    padding: 26px 26px 34px;
+  }
+  .hero {
+    grid-template-columns: 1.25fr .8fr;
+  }
+  .hero h2 {
+    font-size: 35px;
+  }
+  .homeEvents .grid3,
+  #events .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .newMembers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .members,
+  .matches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet */
+@media (max-width: 1000px) and (min-width: 701px) {
+  .side {
+    width: 75px;
+  }
+
+  .main {
+    margin-left: 75px;
+    width: calc(100% - 75px);
+    padding: 22px 20px 30px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .homeEvents .grid3,
+  #events .grid3,
+  .newMembers,
+  .members,
+  .matches {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .stats,
+  .pipeline,
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .askGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .eventPhoto {
+    height: 190px;
+  }
+
+  .top {
+    gap: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+    padding-bottom: 78px;
+  }
+
+  .app {
+    display: block;
+    width: 100%;
+  }
+
+  .side {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    max-width: 100vw;
+    height: 70px;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 16px 12px 26px;
+  }
+
+  .top {
+    width: 100%;
+  }
+
+  .top > div,
+  .top > div:last-child {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 17px;
+  }
+
+  .hero h2 {
+    max-width: 100%;
+    font-size: clamp(27px, 8.5vw, 32px);
+  }
+
+  .heroRight {
+    width: 100%;
+  }
+
+  .homeEvents {
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
+  }
+
+  .homeEventsHead {
+    width: 100%;
+  }
+
+  .homeEventsHead .btn {
+    width: 100%;
+  }
+
+  .homeEvents .grid3,
+  #events .grid3,
+  .grid3,
+  .newMembers,
+  .members,
+  .matches,
+  .stats,
+  .pipeline,
+  .timeline,
+  .askGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+  }
+
+  .eventCardPhoto,
+  .newMember,
+  .member,
+  .match,
+  .stat,
+  .card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .eventPhoto {
+    width: 100%;
+    height: clamp(180px, 56vw, 235px);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .eventPhotoTitle {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  .eventPhotoBadge {
+    max-width: calc(100% - 28px);
+    white-space: normal;
+  }
+
+  .eventBody {
+    padding: 15px;
+  }
+
+  .eventBody p {
+    min-height: 0;
+  }
+
+  .eventBody .row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+  }
+
+  .eventBody .row .tag {
+    align-self: flex-start;
+  }
+
+  .eventBody .row .btn {
+    width: 100%;
+  }
+
+  .newMember .btn {
+    width: 100% !important;
+  }
+
+  .memberPhoto {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .sectionHead {
+    flex-wrap: wrap;
+  }
+
+  .sectionHead > * {
+    min-width: 0;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  .filters select,
+  .search,
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  .modal,
+  .formModal {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .modalbox,
+  .formModal .modalbox {
+    width: min(96vw, 620px);
+    max-width: 96vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .gformHead,
+  .gquestion,
+  .confirmBox {
+    max-width: calc(100% - 20px);
+  }
+
+  .nav {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 390px) {
+  .main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .homeEvents {
+    padding: 11px;
+  }
+
+  .card,
+  .newMember,
+  .match,
+  .stat {
+    border-radius: 16px;
+  }
+
+  .eventBody {
+    padding: 13px;
+  }
+
+  .nav button {
+    flex-basis: 56px;
+    min-width: 56px;
+  }
+}
+
+
+/* ===== A3 OFFICIAL COMMUNITY HERO PHOTO =====
+   Only changes the Home hero background; approved aesthetic stays intact. */
+#home .hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(24,27,23,.88) 0%, rgba(24,27,23,.72) 48%, rgba(24,27,23,.48) 100%),
+    url("https://images.squarespace-cdn.com/content/v1/64e7eae5713d422746cdb254/61a27dbd-8388-4e74-a50b-8154436f14a9/0%2B7-min.jpg") center 43% / cover no-repeat;
+  min-height: 355px;
+  align-items: stretch;
+}
+#home .hero > * {
+  position: relative;
+  z-index: 1;
+}
+#home .hero p {
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 1px 10px rgba(0,0,0,.25);
+}
+#home .hero h2 {
+  text-shadow: 0 2px 16px rgba(0,0,0,.28);
+}
+#home .heroRight {
+  background: rgba(25,29,24,.70);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+@media(max-width:700px) {
+  #home .hero {
+    min-height: auto;
+    background-position: 48% center;
+    background:
+      linear-gradient(180deg, rgba(24,27,23,.84) 0%, rgba(24,27,23,.72) 100%),
+      url("https://images.squarespace-cdn.com/content/v1/64e7eae5713d422746cdb254/61a27dbd-8388-4e74-a50b-8154436f14a9/0%2B7-min.jpg") 48% center / cover no-repeat;
+  }
+}
+
+</style>
+<!-- Event imagery updated without changing original UI aesthetic -->
+</head>
+<body>
+<aside class="side">
+<div class="logo">A3</div><div class="sub">COMMUNITY ENGINE</div>
+<div class="nav">
+<button class="active" onclick="go('home',this)"><i>⌂</i><span>Inicio</span></button>
+<button onclick="go('network',this)"><i>◎</i><span>Member Map</span></button>
+<button onclick="go('ask',this)"><i>?</i><span>Ask A3</span></button>
+<button onclick="go('matches',this)"><i>✦</i><span>Business Match</span></button>
+<button onclick="go('events',this)"><i>◷</i><span>Eventos</span></button>
+<button onclick="go('welcome',this)"><i>↻</i><span>Welcome</span></button>
+<button onclick="go('community',this)"><i>♥</i><span>Comunidad</span></button>
+<button onclick="go('insights',this)"><i>▥</i><span>Score</span></button>
+</div>
+<div class="mini"><div class="ava">LK</div><div><b>Lucía</b><br><small style="color:#aeb2a8">Miembro A3</small></div></div>
+</aside>
+
+<main class="main">
+<section id="home" class="page active">
+<div class="top"><div><h1>La Comunidad A3</h1><div class="muted">Donde las conexiones se convierten en oportunidades.</div></div><div><button class="btn white" onclick="go('network')">Directorio</button> <button class="btn lime" onclick="go('matches')">Ver mis matches ✦</button></div></div>
+<div class="hero"><div><span class="eyebrow">A3 COMMUNITY OS</span><h2>Convertí la comunidad en un activo de negocio.</h2><p>Una experiencia digital que conecta miembros, activa eventos, detecta oportunidades y ayuda al equipo A3 a entender qué valor está generando la comunidad.</p><button class="btn lime" onclick="go('matches')">Descubrir oportunidades →</button></div>
+<div class="heroRight"><div><div class="meta" style="color:#b9bdb3">NUEVOS EN A3 ESTE MES</div><div class="n">12</div><div style="color:#c8cbc2;font-size:12px">nuevos miembros para conocer</div></div><div><div style="font-size:20px;font-weight:850">Conocelos →</div><small style="color:#b9bdb3">qué hacen · qué buscan · cómo pueden ayudarte</small></div></div></div>
+
+<div class="homeEvents">
+  <div class="homeEventsHead">
+    <div>
+      <div class="meta">ESTE MES EN A3</div>
+      <h3>Próximos eventos ✦</h3>
+      <p>Experiencias para conocer gente, aprender y generar oportunidades dentro de la comunidad.</p>
+    </div>
+    <button class="btn lime" onclick="go('events')">Ver todos los eventos →</button>
+  </div>
+
+  <div class="grid3">
+    <div class="card eventCardPhoto">
+      <div class="eventPhoto" style="background-image:url('https://desky-production-public-bucket.s3.amazonaws.com/media/images/coworking/IMG_2915_Copy_1_1.jpg')">
+        <span class="eventPhotoBadge">NETWORKING · A3 BUSINESS</span>
+        <div class="eventPhotoTitle">Founder Breakfast</div>
+      </div>
+      <div class="eventBody">
+        <div class="eventDateStrong">17 SEP · 09:30 · Palermo Soho</div>
+        <h4>Founder Breakfast</h4>
+        <p>Desayuno entre founders y líderes para compartir desafíos, contactos y oportunidades de negocio.</p>
+        <div class="row"><span class="tag g">18 confirmados</span><button class="btn dark" onclick="eventReg('Founder Breakfast')">Registrarme</button></div>
+      </div>
+    </div>
+
+    <div class="card eventCardPhoto">
+      <div class="eventPhoto" style="background-image:url('https://workspace.ginetta.net/images/ginetta-workspace-hero-image-02.jpg')">
+        <span class="eventPhotoBadge">NETWORKING · A3 BUSINESS</span>
+        <div class="eventPhotoTitle">Networking Lunch</div>
+      </div>
+      <div class="eventBody">
+        <div class="eventDateStrong">19 SEP · 13:00 · Cowork A3</div>
+        <h4>Networking Lunch</h4>
+        <p>Almuerzo informal para conocer nuevos miembros, intercambiar ideas y generar oportunidades de colaboración.</p>
+        <div class="row"><span class="tag p">24 lugares</span><button class="btn dark" onclick="eventReg('Networking Lunch')">Registrarme</button></div>
+      </div>
+    </div>
+
+    <div class="card eventCardPhoto">
+      <div class="eventPhoto" style="background-image:url('https://images.pexels.com/photos/6150520/pexels-photo-6150520.jpeg?auto=compress&cs=tinysrgb&w=1400')">
+        <span class="eventPhotoBadge">SOCIAL · A3 COMMUNITY</span>
+        <div class="eventPhotoTitle">After Office</div>
+      </div>
+      <div class="eventBody">
+        <div class="eventDateStrong">24 SEP · 19:00 · A3 Palermo Soho</div>
+        <h4>After Office</h4>
+        <p>Cerveza, pizza y buena compañía para conocer miembros de A3 en un ambiente relajado y cerrar el día conectando.</p>
+        <div class="row"><span class="tag o">35 confirmados</span><button class="btn dark" onclick="eventReg('After Office')">Registrarme</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+<div class="sectionHead"><div><h3>Nuevos integrantes del mes 👋</h3><span class="muted">Descubrí quién se sumó a A3, qué hace y qué está buscando.</span></div><span class="muted" onclick="go('network')" style="cursor:pointer">Ver todos los miembros →</span></div>
+<div class="newMembers">
+
+<div class="newMember">
+<img class="memberPhoto" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1400&h=1400&q=95" alt="Foto ilustrativa de Lucía Fernández">
+<div class="meta">NUEVA MIEMBRO · ARGENTINA</div>
+<div class="memberNameRow"><h4>Lucía Fernández</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Lucía Fernández" title="Ver LinkedIn">in</a></div>
+<div class="memberRole">Product Manager · Mercado Libre</div>
+<div class="memberAge">34 años · Buenos Aires</div>
+<div class="memberAbout">Trabaja en producto digital y experiencia de usuario para soluciones de tecnología y e-commerce.</div>
+<div class="seekBox"><b>🔎 Está buscando</b>Conocer founders, proyectos de AI aplicada y personas de producto con quienes intercambiar experiencias.</div>
+<button class="btn dark" style="width:100%;margin-top:11px" onclick="connect('Lucía Fernández')">Conectar con Lucía</button>
+<div class="demoNote">Perfil y foto ilustrativos para el prototipo.</div>
+</div>
+
+<div class="newMember">
+<img class="memberPhoto" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1400&h=1400&q=95" alt="Foto ilustrativa de Nicolás Bianchi">
+<div class="meta">NUEVO MIEMBRO · ARGENTINA</div>
+<div class="memberNameRow"><h4>Nicolás Bianchi</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Nicolás Bianchi" title="Ver LinkedIn">in</a></div>
+<div class="memberRole">Business Development · Ualá</div>
+<div class="memberAge">38 años · Buenos Aires</div>
+<div class="memberAbout">Desarrolla partnerships y nuevas oportunidades de negocio dentro del ecosistema fintech latinoamericano.</div>
+<div class="seekBox"><b>🔎 Está buscando</b>Fintechs, partners estratégicos y founders construyendo soluciones financieras para LATAM.</div>
+<button class="btn dark" style="width:100%;margin-top:11px" onclick="connect('Nicolás Bianchi')">Conectar con Nicolás</button>
+<div class="demoNote">Perfil y foto ilustrativos para el prototipo.</div>
+</div>
+
+<div class="newMember">
+<img class="memberPhoto" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1400&h=1400&q=95" alt="Foto ilustrativa de Camila Rossi">
+<div class="meta">NUEVA MIEMBRO · ARGENTINA</div>
+<div class="memberNameRow"><h4>Camila Rossi</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Camila Rossi" title="Ver LinkedIn">in</a></div>
+<div class="memberRole">AI Strategy Lead · Globant</div>
+<div class="memberAge">36 años · Buenos Aires</div>
+<div class="memberAbout">Trabaja con empresas que buscan transformar procesos y experiencias usando inteligencia artificial.</div>
+<div class="seekBox"><b>🔎 Está buscando</b>Casos de uso de AI, líderes de innovación y startups con tecnología lista para pilotear.</div>
+<button class="btn dark" style="width:100%;margin-top:11px" onclick="connect('Camila Rossi')">Conectar con Camila</button>
+<div class="demoNote">Perfil y foto ilustrativos para el prototipo.</div>
+</div>
+
+<div class="newMember">
+<img class="memberPhoto" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1400&h=1400&q=95" alt="Foto ilustrativa de Alex Miller">
+<div class="meta">NUEVO MIEMBRO · UNITED STATES</div>
+<div class="memberNameRow"><h4>Alex Miller</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Alex Miller" title="Ver LinkedIn">in</a></div>
+<div class="memberRole">Startup Partnerships · Stripe</div>
+<div class="memberAge">40 años · New York</div>
+<div class="memberAbout">Trabaja con startups y ecosistemas emprendedores para ayudarlos a lanzar y escalar productos digitales.</div>
+<div class="seekBox"><b>🔎 Está buscando</b>Startups argentinas con expansión internacional, founders y partners del ecosistema tech.</div>
+<button class="btn dark" style="width:100%;margin-top:11px" onclick="connect('Alex Miller')">Conectar con Alex</button>
+<div class="demoNote">Perfil y foto ilustrativos para el prototipo.</div>
+</div>
+
+</div></div>
+
+</section>
+
+<section id="events" class="page">
+<div class="top"><div><h1>A3 Business & A3 Social</h1><div class="muted">Dos rituales mensuales: networking profesional + conexiones humanas.</div></div><button class="btn lime">+ Crear evento</button></div>
+<div class="card" style="margin-bottom:15px"><div class="sectionHead"><h3>Septiembre · 2026</h3><span class="tag g">4 eventos · 92 registrados</span></div>
+<div class="grid3">
+<div><div class="eventPhoto" style="background-image:url('https://images.squarespace-cdn.com/content/v1/64e7eae5713d422746cdb254/afeb5a8f-9200-4bb7-b449-177877c6d506/Image-3.png')"><span class="eventPhotoBadge">NETWORKING</span><div class="eventPhotoTitle">A3 Founders Breakfast</div></div><div class="meta">17 SEP · 09:30</div><div class="memberNameRow"><h4>A3 Founders Breakfast</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de A3 Founders Breakfast" title="Ver LinkedIn">in</a></div><p>18 confirmados · 6 perfiles nuevos conectados.</p><button class="btn dark" onclick="eventReg('A3 Founders Breakfast')">Registrarme + Calendar</button></div>
+<div><div class="eventPhoto" style="background-image:url('https://workspace.ginetta.net/images/ginetta-workspace-hero-image-02.jpg')"><span class="eventPhotoBadge">NETWORKING · A3 BUSINESS</span><div class="eventPhotoTitle">Networking Lunch</div></div><div class="meta">19 SEP · 17:30</div><h4>Networking Lunch</h4><p>12 confirmados · 4 desafíos de IA enviados.</p><button class="btn dark" onclick="eventReg('Networking Lunch')">Registrarme + Calendar</button></div>
+<div><div class="eventPhoto" style="background-image:url('https://images.pexels.com/photos/6150520/pexels-photo-6150520.jpeg?auto=compress&cs=tinysrgb&w=1400')"><span class="eventPhotoBadge">SOCIAL</span><div class="eventPhotoTitle">After Office</div></div><div class="meta">24 SEP · 19:00</div><div class="memberNameRow"><h4>After Office</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de After Office" title="Ver LinkedIn">in</a></div><p>35 confirmados · conexiones humanas y pertenencia.</p><button class="btn dark" onclick="eventReg('After Office')">Registrarme + Calendar</button></div>
+</div></div>
+<div class="aiBox"><div><h3>💡 La IA también trabaja antes del evento.</h3><p>Según los perfiles de los asistentes, A3 puede sugerir 3 personas que deberías conocer durante cada evento y enviarles una introducción.</p></div><button class="btn lime" onclick="go('matches')">Ver ejemplo</button></div>
+</section>
+
+<section id="network" class="page">
+<div class="top"><div><h1>A3 Member Map</h1><div class="muted">Quién está en A3 + qué hace + qué necesita + qué puede aportar.</div></div><button class="btn lime">Completar mi perfil</button></div>
+<input class="search" id="search" oninput="filter()" placeholder="🔎  Ej: “busco HR Tech”, “ofrece inversión”, “CTO”, “startups”">
+<div class="filters"><select><option>Todos los roles</option><option>Founder</option><option>Sales</option><option>People</option><option>Investment</option></select><select><option>Lo que ofrecen</option><option>Ventas</option><option>Talento</option><option>Inversión</option><option>IA</option></select><select><option>Lo que buscan</option><option>Clientes</option><option>Partners</option><option>Talento</option><option>Startups</option></select></div>
+<div class="members" id="members">
+<div class="card member" data-x="maria gonzalez growthlab ceo growth b2b saas"><div class="ava">MG</div><div><div class="memberNameRow"><h4>María González</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de María González" title="Ver LinkedIn">in</a></div><p>CEO · GrowthLab</p><div class="chips"><span class="chip offer">✓ Ofrece Growth</span><span class="chip seek">⌕ Busca B2B SaaS</span></div><button class="btn white" style="margin-top:11px" onclick="connect('María González')">Conectar</button></div></div>
+<div class="card member" data-x="juan perez north ventures partner inversion startups"><div class="ava" style="background:#ddd5ff">JP</div><div><div class="memberNameRow"><h4>Juan Pérez</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Juan Pérez" title="Ver LinkedIn">in</a></div><p>Partner · North Ventures</p><div class="chips"><span class="chip offer">✓ Ofrece Inversión</span><span class="chip seek">⌕ Busca Startups</span></div><button class="btn white" style="margin-top:11px" onclick="connect('Juan Pérez')">Conectar</button></div></div>
+<div class="card member" data-x="sofia costa nova head people talento hr tech"><div class="ava" style="background:#ffd2b8">SC</div><div><div class="memberNameRow"><h4>Sofía Costa</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Sofía Costa" title="Ver LinkedIn">in</a></div><p>Head of People · Nova</p><div class="chips"><span class="chip offer">✓ Ofrece Talento</span><span class="chip seek">⌕ Busca HR Tech</span></div><button class="btn white" style="margin-top:11px" onclick="connect('Sofía Costa')">Conectar</button></div></div>
+<div class="card member" data-x="diego martin orbit ai cto ia clientes"><div class="ava" style="background:#c8ecff">DM</div><div><div class="memberNameRow"><h4>Diego Martín</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Diego Martín" title="Ver LinkedIn">in</a></div><p>CTO · Orbit AI</p><div class="chips"><span class="chip offer">✓ Ofrece IA</span><span class="chip seek">⌕ Busca Clientes</span></div><button class="btn white" style="margin-top:11px" onclick="connect('Diego Martín')">Conectar</button></div></div>
+<div class="card member" data-x="carla rossi brand studio founder branding clientes"><div class="ava" style="background:#ffc8e5">CR</div><div><div class="memberNameRow"><h4>Carla Rossi</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Carla Rossi" title="Ver LinkedIn">in</a></div><p>Founder · Brand Studio</p><div class="chips"><span class="chip offer">✓ Ofrece Branding</span><span class="chip seek">⌕ Busca Clientes</span></div><button class="btn white" style="margin-top:11px" onclick="connect('Carla Rossi')">Conectar</button></div></div>
+<div class="card member" data-x="martin silva cloudco sales director ventas partners"><div class="ava">MS</div><div><div class="memberNameRow"><h4>Martín Silva</h4><a class="linkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn de Martín Silva" title="Ver LinkedIn">in</a></div><p>Sales Director · CloudCo</p><div class="chips"><span class="chip offer">✓ Ofrece Ventas</span><span class="chip seek">⌕ Busca Partners</span></div><button class="btn white" style="margin-top:11px" onclick="connect('Martín Silva')">Conectar</button></div></div>
+</div></section>
+
+<section id="matches" class="page">
+<div class="top"><div><h1>A3 Business Match ✦</h1><div class="muted">La plataforma analiza perfiles, necesidades e intereses para sugerir conexiones con potencial.</div></div><button class="btn lime" onclick="alert('En producción: ejecutaríamos el motor de matching con los perfiles reales de A3.')">Actualizar matches</button></div>
+<div class="aiBox"><div><h3>Tu oportunidad #1 esta semana</h3><p>Detectamos una coincidencia fuerte entre tu búsqueda de empresas que implementen IA y un miembro que está evaluando automatización para su equipo.</p></div><span class="tag g">92% match</span></div>
+<div class="matches">
+<div class="match"><span class="score">92%</span><div><span class="ava">DM</span><b>Diego Martín</b></div><p class="muted">CTO · Orbit AI</p><div class="why"><b>¿Por qué?</b><br>Busca clientes B2B + vos ofrecés IA y estrategia.</div><button class="btn dark" onclick="connect('Diego Martín')">Presentarnos →</button></div>
+<div class="match"><span class="score">87%</span><div><span class="ava" style="background:#ffd2b8">SC</span><b>Sofía Costa</b></div><p class="muted">Head of People · Nova</p><div class="why"><b>¿Por qué?</b><br>Busca HR Tech + vos trabajás con innovación.</div><button class="btn dark" onclick="connect('Sofía Costa')">Presentarnos →</button></div>
+<div class="match"><span class="score">81%</span><div><span class="ava" style="background:#ddd5ff">JP</span><b>Juan Pérez</b></div><p class="muted">Partner · North Ventures</p><div class="why"><b>¿Por qué?</b><br>Busca startups y proyectos innovadores.</div><button class="btn dark" onclick="connect('Juan Pérez')">Presentarnos →</button></div>
+</div>
+</section>
+
+<section id="opps" class="page">
+<div class="top"><div><h1>Oportunidades</h1><div class="muted">De una necesidad a un match, una introduction y un resultado concreto.</div></div><button class="btn lime">+ Registrar oportunidad</button></div>
+<div class="pipeline">
+<div class="col"><h4>🔎 Detectadas</h4><div class="opp"><b>Nova → HR Tech</b><small>Sofía + 2 proveedores</small><div class="money">AR$ 2,5M</div></div><div class="opp"><b>GrowthLab → B2B SaaS</b><small>María + 3 startups</small><div class="money">AR$ 1,8M</div></div></div>
+<div class="col"><h4>🤝 Conectadas</h4><div class="opp"><b>Orbit AI → CloudCo</b><small>Introducción realizada</small><div class="money">AR$ 4,2M</div></div></div>
+<div class="col"><h4>💬 En conversación</h4><div class="opp"><b>Brand Studio → GrowthLab</b><small>Reunión agendada</small><div class="money">AR$ 900K</div></div></div>
+<div class="col"><h4>✓ Generadas</h4><div class="opp"><b>A3 member referral</b><small>Nuevo contrato entre miembros</small><div class="money">AR$ 1,2M</div></div></div>
+</div>
+<div class="notice card" style="margin-top:16px;background:#eff7d3"><b>La métrica que vendería a A3:</b> no solo “cantidad de miembros” o “cantidad de eventos”, sino <b>valor generado por la comunidad</b>: conexiones, oportunidades, referrals, reuniones y negocio entre miembros.</div>
+</section>
+
+
+<section id="ask" class="page">
+<div class="top"><div><h1>A3 Ask the Community</h1><div class="muted">Convertir a la comunidad en una red de ayuda, recomendaciones y reciprocidad.</div></div><button class="btn lime" onclick="newAsk()">+ Publicar un Ask</button></div>
+<div class="askGrid">
+<div>
+  <div class="askItem"><b>“¿Alguien conoce un buen contador para una startup?”</b><span class="muted">Felipe · 4 respuestas · 2 recomendaciones</span></div>
+  <div class="askItem"><b>“Estoy buscando un diseñador UX para un proyecto de 6 semanas.”</b><span class="muted">Laura · 6 respuestas · 3 perfiles relevantes</span></div>
+  <div class="askItem"><b>“¿Alguien tiene experiencia vendiendo en Brasil?”</b><span class="muted">Tomás · 7 respuestas · Martín Silva podría ayudar</span></div>
+  <div class="askItem"><b>“Estoy buscando alguien que me ayude con AI.”</b><span class="muted">Ana · 5 respuestas · Diego Martín 93% match</span></div>
+</div>
+<div class="card" style="background:#eff7d3">
+  <div class="meta">CULTURA DE AYUDA</div>
+  <h3>Una red de confianza, no solo gente compartiendo un edificio.</h3>
+  <p>Pedir ayuda, recomendar, compartir conocimiento y hacer introductions se vuelve parte natural de la experiencia A3.</p>
+  <button class="btn dark" onclick="go('matches')">Ver matches sugeridos</button>
+</div>
+</div>
+</section>
+
+<section id="welcome" class="page">
+<div class="top"><div><h1>A3 Welcome Journey</h1><div class="muted">Que ningún nuevo miembro pase semanas en A3 sin conocer a nadie.</div></div><button class="btn lime">Activar onboarding</button></div>
+<div class="timeline">
+  <div class="step"><span class="num">DÍA 1</span><b>Bienvenida</b><p>Presentación del espacio y de la comunidad.</p></div>
+  <div class="step"><span class="num">SEMANA 1</span><b>3 introductions</b><p>Conexiones personalizadas con miembros relevantes.</p></div>
+  <div class="step"><span class="num">PRIMER EVENTO</span><b>Invitación personal</b><p>Recomendación del evento ideal para integrarse.</p></div>
+  <div class="step"><span class="num">DÍA 30</span><b>Follow-up</b><p>Feedback sobre integración, vínculos y necesidades.</p></div>
+</div>
+<div class="section card">
+  <div class="meta">MEMBER JOURNEY</div>
+  <h3>JOIN → WELCOME → CONNECT → CONTRIBUTE → BELONG → ADVOCATE → RETAIN</h3>
+  <p>La comunidad se convierte progresivamente en un motivo para quedarse, recomendar A3 y participar activamente.</p>
+</div>
+</section>
+
+<section id="community" class="page">
+<div class="top"><div><h1>Community-led A3</h1><div class="muted">Miembros protagonistas: spotlights, ambassadors, content y Community Council.</div></div><button class="btn lime">Proponer iniciativa</button></div>
+<div class="grid3">
+  <div class="card">
+    <div class="meta">MEMBER SPOTLIGHT</div>
+    <div class="spotlight" style="margin-top:12px"><div class="ava">MG</div><div><h3 style="margin:0">Meet María 👋</h3><div class="muted">CEO · GrowthLab</div><p>¿Qué hace? ¿Qué está construyendo? ¿Qué busca? ¿En qué puede ayudar?</p><button class="btn dark" onclick="connect('María González')">Conocer a María</button></div></div>
+  </div>
+  <div class="card ambassador"><div class="ava" style="background:#ddd5ff">JP</div><div><div class="meta">COMMUNITY AMBASSADOR</div><b>Juan Pérez</b><p>Conecta founders, participa y detecta oportunidades.</p></div></div>
+  <div class="card">
+    <div class="meta">COMMUNITY COUNCIL</div><h3>Co-crear la comunidad</h3><p>Un pequeño grupo de miembros conversa periódicamente sobre qué funciona, qué falta y qué iniciativas quieren impulsar.</p><button class="btn white">Próxima reunión</button>
+  </div>
+</div>
+<div class="section card">
+  <div class="meta">COMMUNITY CONTENT</div><h3>Mantener viva la comunidad entre evento y evento</h3>
+  <div class="chips"><span class="chip offer">Monday Member</span><span class="chip seek">A3 Opportunity</span><span class="chip">A3 Ask</span><span class="chip offer">A3 Wins</span><span class="chip">Welcome to A3</span></div>
+</div>
+</section>
+
+<section id="insights" class="page">
+<div class="top"><div><h1>A3 Community Score</h1><div class="muted">El dashboard del Community Manager: qué está pasando y dónde intervenir.</div></div><button class="btn white">Septiembre 2026 ▾</button></div>
+
+<div class="section grid3">
+<div class="scorecard" style="grid-column:span 1"><div class="meta" style="color:#b9bdb3;text-align:center">A3 COMMUNITY SCORE</div><div class="scoreRing"><div><span><b>78</b><br><small>/100</small></span></div></div><div style="margin-top:15px"><div class="kpiLine"><span>Participación</span><b>81</b></div><div class="kpiLine"><span>Conexiones</span><b>76</b></div><div class="kpiLine"><span>Valor generado</span><b>74</b></div><div class="kpiLine"><span>Pertenencia</span><b>82</b></div></div></div>
+<div class="card" style="grid-column:span 2"><div class="sectionHead"><h3>Qué medimos</h3></div><div class="askItem"><b>Engagement</b><span class="muted">Miembros activos · participación · asistencia · frecuencia</span></div><div class="askItem"><b>Connection</b><span class="muted">Introductions · matches · nuevas conexiones · integración</span></div><div class="askItem"><b>Business</b><span class="muted">Leads · referrals · partnerships · colaboraciones</span></div><div class="askItem"><b>Belonging + Retention</b><span class="muted">Satisfacción · recomendación · renovaciones · churn</span></div></div>
+</div>
+<div class="stats"><div class="stat"><b>68%</b><span>MAU / miembros</span><div class="trend">+12%</div></div><div class="stat"><b>184</b><span>conexiones</span><div class="trend">+24%</div></div><div class="stat"><b>47</b><span>oportunidades</span><div class="trend">+31%</div></div><div class="stat"><b>4,8/5</b><span>event satisfaction</span><div class="trend">+0,3</div></div></div>
+<div class="section grid3">
+<div class="card" style="grid-column:span 2"><div class="sectionHead"><h3>Actividad de comunidad</h3><span class="muted">últimos 6 meses</span></div><div class="chart"><div class="bar" style="height:46%"><span>82</span></div><div class="bar" style="height:58%"><span>104</span></div><div class="bar" style="height:53%"><span>96</span></div><div class="bar" style="height:72%"><span>131</span></div><div class="bar" style="height:84%"><span>153</span></div><div class="bar" style="height:100%"><span>184</span></div></div><div class="labels"><div>Abr</div><div>May</div><div>Jun</div><div>Jul</div><div>Ago</div><div>Sep</div></div></div>
+<div class="card"><div class="sectionHead"><h3>Lo que más buscan</h3></div><p><span class="tag g">Clientes</span> 34%</p><p><span class="tag p">Talento</span> 23%</p><p><span class="tag o">Partners</span> 19%</p><p><span class="tag">Inversión</span> 14%</p><p><span class="tag">HR Tech</span> 10%</p></div>
+</div>
+<div class="section card"><h3>Recomendación de IA para el Community Manager</h3><p style="color:#5d6058;line-height:1.6">“El evento de founders del 17/9 tiene alta concentración de perfiles B2B SaaS. Invitá a 4 miembros de ventas, 2 inversores y 3 proveedores de servicios. Hay 11 matches potenciales que todavía no interactuaron.”</p><button class="btn dark" onclick="alert('En producción, esta recomendación podría convertirse en tareas para el Community Manager.')">Convertir en acciones →</button></div>
+
+<div class="section"><div class="sectionHead"><h3>Roadmap · 90 días</h3><span class="muted">Discover → Connect → Grow</span></div>
+<div class="grid3">
+<div class="card"><div class="meta">MES 1 · DISCOVER</div><h3>Entender la comunidad</h3><p>Diagnóstico, entrevistas, community mapping, objetivos, calendario y primeros A3 Business + A3 Social.</p></div>
+<div class="card"><div class="meta">MES 2 · CONNECT</div><h3>Activar la red</h3><p>Member Map, spotlights, primeros Business Matches, Ambassadors y networking.</p></div>
+<div class="card"><div class="meta">MES 3 · GROW</div><h3>Escalar lo que funciona</h3><p>Referral program, partnerships, Community Council, Community Report y roadmap.</p></div>
+</div></div>
+</section>
+</main>
+
+
+<div class="modal formModal" id="modal">
+  <div class="modalbox">
+    <button class="close" onclick="closeM()" style="z-index:3">×</button>
+
+    <div class="formBody" id="formBody">
+      <div class="gformHead">
+        <div class="meta" style="color:#673ab7">A3 COMMUNITY · REGISTRO</div>
+        <h2 id="mTitle">Evento</h2>
+        <p>Completá este formulario para reservar tu lugar. Este es un simulacro visual de cómo podría funcionar el registro conectado a Google Forms.</p>
+        <div class="gformReq">* Indica una pregunta obligatoria</div>
+      </div>
+
+      <form id="eventForm" onsubmit="submitEventForm(event)">
+        <div class="gquestion">
+          <label>Nombre y apellido <span class="req">*</span></label>
+          <input class="ginput" id="gfName" required placeholder="Tu respuesta">
+        </div>
+
+        <div class="gquestion">
+          <label>Email <span class="req">*</span></label>
+          <input class="ginput" id="gfEmail" type="email" required placeholder="tu@email.com">
+        </div>
+
+        <div class="gquestion">
+          <label>Empresa / proyecto <span class="req">*</span></label>
+          <input class="ginput" id="gfCompany" required placeholder="Ej. Mercado Libre">
+        </div>
+
+        <div class="gquestion">
+          <label>Rol / cargo</label>
+          <input class="ginput" id="gfRole" placeholder="Ej. Product Manager">
+        </div>
+
+        <div class="gquestion">
+          <label>¿Qué te gustaría encontrar en este evento?</label>
+          <select class="gselect" id="gfGoal">
+            <option value="">Elegí una opción</option>
+            <option>Potenciales clientes</option>
+            <option>Partners / alianzas</option>
+            <option>Talento</option>
+            <option>Inversores</option>
+            <option>Conocer gente de la comunidad</option>
+          </select>
+        </div>
+
+        <div class="gquestion">
+          <label>Contanos brevemente qué estás buscando</label>
+          <textarea class="gtextarea" id="gfNeed" placeholder="Tu respuesta"></textarea>
+        </div>
+
+        <div class="gactions">
+          <button type="submit" class="gsubmit">Enviar</button>
+          <button type="reset" class="gclear">Borrar formulario</button>
+        </div>
+      </form>
+      <div class="gbrand">Google Forms · simulación para demo</div>
+    </div>
+
+    <div class="confirmBox" id="confirmBox">
+      <div class="meta">REGISTRO COMPLETADO</div>
+      <h2 style="margin:8px 0">¡Ya estás registrado/a! 🎉</h2>
+      <p id="confirmText" style="color:#666;line-height:1.5"></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+        <button class="btn dark" onclick="addCalFromForm()">Agregar a Google Calendar</button>
+        <button class="btn" onclick="closeM()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function go(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');else document.querySelectorAll('.nav button').forEach(b=>{if(b.textContent.toLowerCase().includes(id==='matches'?'ai matches':id))b.classList.add('active')});scrollTo({top:0,behavior:'smooth'})}
+function eventReg(n){document.getElementById('mTitle').textContent=n;document.getElementById('modal').classList.add('open')}
+function closeM(){document.getElementById('modal').classList.remove('open')}
+function connect(n){alert('¡Listo! Se generó una solicitud de introducción con '+n+'. En producción, A3 podría mediar la conexión y medir el resultado.')}
+function filter(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('#members .member').forEach(x=>x.style.display=x.dataset.x.includes(q)?'flex':'none')}
+
+function newAsk(){
+  const ask=prompt('¿Qué necesitás de la comunidad A3?');
+  if(ask) alert('Ask publicado: “'+ask+'”\n\nEn producción, A3 buscaría miembros relevantes y sugeriría introductions.');
+}
+
+let currentEventTitle = '';
+
+function openRegistration(title){
+  currentEventTitle = title || 'Evento A3';
+  const titleEl = document.getElementById('mTitle');
+  if(titleEl) titleEl.textContent = currentEventTitle;
+  const body = document.getElementById('formBody');
+  const confirm = document.getElementById('confirmBox');
+  if(body) body.classList.remove('hidden');
+  if(confirm) confirm.classList.remove('show');
+  const f = document.getElementById('eventForm');
+  if(f) f.reset();
+  const modal = document.getElementById('modal');
+  if(modal) modal.classList.add('show');
+}
+
+function submitEventForm(e){
+  e.preventDefault();
+  const name = (document.getElementById('gfName')||{}).value || 'Miembro A3';
+  const body = document.getElementById('formBody');
+  const confirm = document.getElementById('confirmBox');
+  const txt = document.getElementById('confirmText');
+  if(body) body.classList.add('hidden');
+  if(confirm) confirm.classList.add('show');
+  if(txt) txt.textContent = `${name}, reservamos tu lugar para “${currentEventTitle}”. En una implementación real, esta respuesta podría guardarse en Google Forms/Sheets o en el backend de A3.`;
+}
+
+function addCalFromForm(){
+  const title = encodeURIComponent(currentEventTitle || 'Evento A3');
+  window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}`, '_blank');
+}
+
+</script>
+</body></html>
